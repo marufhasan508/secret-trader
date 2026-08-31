@@ -1,6 +1,31 @@
 import { GoogleGenAI, ThinkingLevel } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+function getApiKey(): string {
+  if (typeof process !== "undefined" && process.env?.GEMINI_API_KEY) {
+    return process.env.GEMINI_API_KEY;
+  }
+  const metaEnv = (import.meta as any)?.env;
+  if (metaEnv?.VITE_GEMINI_API_KEY) {
+    return metaEnv.VITE_GEMINI_API_KEY;
+  }
+  if (metaEnv?.GEMINI_API_KEY) {
+    return metaEnv.GEMINI_API_KEY;
+  }
+  return "";
+}
+
+let aiInstance: GoogleGenAI | null = null;
+
+function getAI(): GoogleGenAI {
+  const key = getApiKey();
+  if (!key) {
+    throw new Error("GEMINI_API_KEY is not configured. Please set GEMINI_API_KEY in your environment.");
+  }
+  if (!aiInstance) {
+    aiInstance = new GoogleGenAI({ apiKey: key });
+  }
+  return aiInstance;
+}
 
 const SYSTEM_PROMPT = `
 You are the SECRET TRADER ENGINE. A specialized AI for trading chart analysis.
@@ -35,12 +60,13 @@ You are the SECRET TRADER ENGINE. A specialized AI for trading chart analysis.
 
 export async function analyzeChart(base64Image: string, mimeType: string) {
   try {
+    const ai = getAI();
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
       contents: [
         {
           parts: [
-            { text: "ACT AS MONEY HUNTER ENGINE. PROVIDE INSTANT CONSISTENT ANALYSIS. DO NOT VARY LOGIC FOR THE SAME INPUT." },
+            { text: "ACT AS SECRET TRADER ENGINE. PROVIDE INSTANT CONSISTENT ANALYSIS. DO NOT VARY LOGIC FOR THE SAME INPUT." },
             { text: SYSTEM_PROMPT },
             {
               inlineData: {
@@ -57,7 +83,7 @@ export async function analyzeChart(base64Image: string, mimeType: string) {
       }
     });
     return response.text;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Gemini Analysis Error:", error);
     throw error;
   }
@@ -65,6 +91,7 @@ export async function analyzeChart(base64Image: string, mimeType: string) {
 
 export async function translateText(text: string, targetLanguage: string) {
   try {
+    const ai = getAI();
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
       contents: [
@@ -80,7 +107,7 @@ export async function translateText(text: string, targetLanguage: string) {
       }
     });
     return response.text;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Gemini Translation Error:", error);
     throw error;
   }
@@ -88,7 +115,8 @@ export async function translateText(text: string, targetLanguage: string) {
 
 export async function chatAboutTrading(message: string, history: { role: "user" | "model"; parts: { text: string }[] }[] = []) {
   try {
-    const chat = ai.chats.create({
+    const ai = getAI();
+    const chatSession = ai.chats.create({
       model: "gemini-3-flash-preview",
       config: {
         systemInstruction: SYSTEM_PROMPT,
@@ -97,12 +125,12 @@ export async function chatAboutTrading(message: string, history: { role: "user" 
       history: history,
     });
 
-    const response = await chat.sendMessage({
+    const response = await chatSession.sendMessage({
       message: message,
     });
     
     return response.text;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Gemini Chat Error:", error);
     throw error;
   }
