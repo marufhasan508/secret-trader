@@ -24,7 +24,7 @@ import { analyzeChart, chatAboutTrading, translateText } from './services/gemini
 import { Message } from './types';
 
 const APP_CONFIG = {
-  LICENSE_KEY: "money_hunter_pro", // Change this to update the required password
+  LICENSE_KEY: "maruf_secret_pro", // Change this to update the required password
   LICENSE_EXPIRY: "2026-09-10", // Format: YYYY-MM-DD. Change this to extend/reduce validity
   CONTACT_LINK: "https://t.me/Xmaruf09",
   CONTACT_TEXT: "@Xmaruf09",
