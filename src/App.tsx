@@ -28,8 +28,8 @@ const APP_CONFIG = {
   LICENSE_EXPIRY: "2026-09-10", // Format: YYYY-MM-DD. Change this to extend/reduce validity
   CONTACT_LINK: "https://t.me/Xmaruf09",
   CONTACT_TEXT: "@Xmaruf09",
-  TELEGRAM_CHANNEL: "https://t.me/shooter_by_1x",
-  CHANNEL_TEXT: "shooter_by_1x"
+  TELEGRAM_CHANNEL: "https://t.me/sceret_trader",
+  CHANNEL_TEXT: "sceret_trader"
 };
 
 export default function App() {
@@ -197,7 +197,7 @@ export default function App() {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-[#F0B90B] rounded-2xl mb-6 shadow-[0_0_30px_rgba(240,185,11,0.3)]">
               <TrendingUp className="text-[#181A20] w-8 h-8" />
             </div>
-            <h1 className="text-2xl font-bold tracking-tight mb-2">MONEY <span className="text-[#F0B90B]">HUNTER</span></h1>
+            <h1 className="text-2xl font-bold tracking-tight mb-2">SECRET <span className="text-[#F0B90B]">TRADER</span></h1>
             <p className="text-[#848E9C] text-sm">SECURE ANALYTICS ENGINE</p>
           </div>
 
@@ -251,7 +251,7 @@ export default function App() {
         </motion.div>
         
         <div className="mt-8 text-center text-[10px] text-[#474D57] font-mono opacity-50 z-10">
-          MONEY HUNTER ANALYTICS ENGINE v1.0.4 - SYSTEM SECURE
+          SECRET TRADER ANALYTICS ENGINE v1.0.4 - SYSTEM SECURE
         </div>
       </div>
     );
@@ -265,7 +265,7 @@ export default function App() {
           <div className="bg-[#F0B90B] p-2 rounded-lg">
             <TrendingUp className="text-[#181A20] w-4 h-4 md:w-5 md:h-5" />
           </div>
-          <h1 className="text-lg md:text-xl font-bold tracking-tight">MONEY <span className="text-[#F0B90B]">HUNTER</span></h1>
+          <h1 className="text-lg md:text-xl font-bold tracking-tight">SECRET <span className="text-[#F0B90B]">TRADER</span></h1>
         </div>
         <div className="flex items-center gap-2 md:gap-4 text-[10px] md:text-sm font-medium">
           <div className="flex items-center gap-1.5 px-2 md:px-3 py-1 bg-[#2B3139] rounded-full text-[#0ECB81] border border-[#0ECB81]/20">
@@ -466,12 +466,12 @@ export default function App() {
               <div className="flex flex-col gap-1 items-end">
                 <span className="text-[10px] uppercase tracking-widest font-bold text-[#474D57]">Official Source</span>
                 <a 
-                  href="https://t.me/shooter_by_1x" 
+                  href={APP_CONFIG.TELEGRAM_CHANNEL} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 hover:text-[#0088cc] transition-colors group"
                 >
-                  <span className="font-mono text-xs">Channel: shooter_by_1x</span>
+                  <span className="font-mono text-xs">Channel: {APP_CONFIG.CHANNEL_TEXT}</span>
                   <div className="w-5 h-5 flex items-center justify-center bg-[#0088cc]/10 rounded group-hover:bg-[#0088cc]/20">
                     <Send className="w-3 h-3 text-[#0088cc]" />
                   </div>
@@ -480,7 +480,7 @@ export default function App() {
             </div>
             
             <div className="text-center text-[10px] text-[#474D57] font-mono py-2 opacity-50">
-              MONEY HUNTER ANALYTICS ENGINE v1.0.4 - SYSTEM SECURE
+              SECRET TRADER ANALYTICS ENGINE v1.0.4 - SYSTEM SECURE
             </div>
           </footer>
         </main>

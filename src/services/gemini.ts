@@ -3,7 +3,7 @@ import { GoogleGenAI, ThinkingLevel } from "@google/genai";
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 const SYSTEM_PROMPT = `
-You are the MONEY HUNTER ENGINE. A specialized AI for trading chart analysis.
+You are the SECRET TRADER ENGINE. A specialized AI for trading chart analysis.
 
 🔹 RULES:
 1. IF the uploaded image is NOT a trading chart or market data screenshot, you MUST reply starting with "ERROR: INVALID IMAGE" and ask the user to upload a clear trading chart to proceed.
